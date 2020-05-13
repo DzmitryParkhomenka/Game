@@ -7,7 +7,7 @@ public class Animation implements Runnable {
     }
 
     public void run() {
-        while(true) {
+        while (true) {
             blockBreakerPanel.update();
             try {
                 Thread.sleep(10);

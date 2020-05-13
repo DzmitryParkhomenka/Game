@@ -5,6 +5,7 @@ public class Block extends Rectangle {
     Image image;
     int dx = 3;
     int dy = -3;
+    boolean destroyed = false;
 
     Block(int a, int b, int w, int h, String imagePath) {
         x = a;
@@ -15,6 +16,8 @@ public class Block extends Rectangle {
     }
 
     public void draw(Graphics graphics, Component component) {
-        graphics.drawImage(image, x, y, width, height, component);
+        if (!destroyed) {
+            graphics.drawImage(image, x, y, width, height, component);
+        }
     }
 }

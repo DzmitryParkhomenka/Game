@@ -32,7 +32,7 @@ public class BlockBreakerPanel extends JPanel implements KeyListener {
             blocks.add(new Block((i * 60 + 2), 75, 60, 25, "src\\main\\resources\\blue.png"));
         }
 
-        ball.add(new Block(237, 456, 25, 25, "src\\main\\resources\\ball.png"));
+        ball.add(new Block(237, 437, 25, 25, "src\\main\\resources\\ball.png"));
 
         addKeyListener(this);
         setFocusable(true);
@@ -53,15 +53,25 @@ public class BlockBreakerPanel extends JPanel implements KeyListener {
     }
 
     public void update() {
-        for (Block block : ball) {
-            block.x += block.dx;
-            if (block.x > (getWidth() - size) && block.dx > 0 || block.x < 0) {
-                block.dx *= -1;
+        for (Block ball : ball) {
+            ball.x += ball.dx;
+
+            if (ball.x > (getWidth() - size) && ball.dx > 0 || ball.x < 0) {
+                ball.dx *= -1;
             }
-            if (block.y < 0 || block.intersects(paddle)) {
-                block.dy *= -1;
+
+            if (ball.y < 0 || ball.intersects(paddle)) {
+                ball.dy *= -1;
             }
-            block.y += block.dy;
+
+            ball.y += ball.dy;
+
+            for (Block block : blocks) {
+                if (ball.intersects(block) && !block.destroyed) {
+                    block.destroyed = true;
+                    ball.dy *= -1;
+                }
+            }
         }
         repaint();
     }
