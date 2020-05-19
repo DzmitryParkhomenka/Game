@@ -89,7 +89,7 @@ public class BlockBreakerPanel extends JPanel implements KeyListener {
     public void update() {
         for (Block power : powerUp) {
             power.y += 1;
-            if (power.intersects(paddle) && !power.isDestroyed) {
+            if (!isGameOver && power.intersects(paddle) && !power.isDestroyed) {
                 power.isDestroyed = true;
                 superBall.add(new Block(paddle.getLocation().x + 55, paddle.getLocation().y - 25, 20, 20, "src\\main\\resources\\superBall.png"));
             }
